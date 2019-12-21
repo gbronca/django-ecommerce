@@ -19,6 +19,6 @@ from products.views import ProductListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('products/', include('products.urls', namespace='products')),
-    path('products/', ProductListView.as_view()),
+    path('products/', include('products.urls', namespace='products')),
+    # path('products/', ProductListView.as_view()),
 ]
