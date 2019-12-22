@@ -1,5 +1,5 @@
+{% load static %}
 <!DOCTYPE html>
-{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,6 @@
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
 
         <!-- TODO: Rename div ID to something more meaningful -->
 
@@ -38,20 +37,23 @@
                     <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                    <a class="nav-link" href="#">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" href="#"><i
                             class="far fa-user"></i></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'accounts:login' %}">Login</a>
-                        <a class="dropdown-item" href="{% url 'accounts:signup' %}">Sign up</a>
+                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="#">Sign up</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
                 {% endif %}
+                <li class="nav-item {% if request.path == "/about/" %} active {% endif %}">
+                    <a class="nav-link" href="/about/">About Us</a>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
