@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from .models import Product
 
 class ProductListView(ListView):
-    template_name = 'products/list.html'
+    template_name = 'products/products.html'
 
     def get_queryset(self, *args, **kwargs):
         return Product.objects.active()

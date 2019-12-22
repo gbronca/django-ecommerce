@@ -1,6 +1,7 @@
 import os
 import random
 from django.db import models
+from django.urls import reverse
 
 
 def get_filename_ext(filepath):
@@ -37,6 +38,7 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True)
+    # slug = models.SlugField(blank=True, unique=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     colour = models.CharField(max_length=20, null=True)
     active = models.BooleanField(default=True)
@@ -47,6 +49,10 @@ class Product(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    
+    def get_absolute_url(self):
+        return reverse('products:product_detail', kwargs={'pk':self.pk})
 
 
 class ProductImage(models.Model):
