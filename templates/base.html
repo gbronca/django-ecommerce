@@ -1,4 +1,8 @@
 {% load static %}
+{% url 'index' as index_url %}
+{% url 'about' as about_url %}
+{% url 'products:products_list' as products_list_url %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +30,13 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item {% if request.path == index_url %} active {% endif %}">
+                    <a class="nav-link" href="{{ index_url }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item {% if request.path == products_list_url %} active {% endif %}">
+                    <a class="nav-link" href="{{ products_list_url }}">Products</a>
                 </li>
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
                 </li>
@@ -41,7 +45,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" href="#"><i
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"><i
                             class="far fa-user"></i></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Login</a>
@@ -51,8 +55,8 @@
                     </div>
                 </li>
                 {% endif %}
-                <li class="nav-item {% if request.path == "/about/" %} active {% endif %}">
-                    <a class="nav-link" href="/about/">About Us</a>
+                <li class="nav-item {% if request.path == about_url %} active {% endif %}">
+                    <a class="nav-link" href="{{ about_url }}">About Us</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -63,8 +67,15 @@
     </nav>
     <!-- END OF NAVBAR -->
 
-    <main>
-        {% block content_block %}
+    <main class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}
 
         {% endblock %}
     </main>

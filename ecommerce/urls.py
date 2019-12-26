@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from accounts import views as accounts_view
 # from products.views import ProductListView
 
 urlpatterns = [
@@ -23,4 +24,6 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='index.html'), name='index'),
     path('about/',TemplateView.as_view(template_name='about.html'), name='about'),
     path('products/', include('products.urls', namespace='products')),
+    path('accounts/', accounts_view.signup, name='signup'),
+    # path('accounts/', include('accounts.urls', namespace='accounts')),
 ]

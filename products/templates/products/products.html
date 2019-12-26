@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content_block %}
+{% block content %}
 
     <div class="container">
         <div class="row">
@@ -12,8 +12,8 @@
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ object.name }}</h5>
-                        <p class="card-text">{{ object.description }}</p>
-                        <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">{{ object.description|truncatewords:12 }}</p>
+                        <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>
